@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>VirtualSMS</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>VirtualSMS</Authors>
+    <Description>.NET SDK for VirtualSMS — SMS verification with real physical SIM cards. WhatsApp, Telegram, Google and 700+ services.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://virtualsms.io</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/virtualsms-io/dotnet-sdk</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
