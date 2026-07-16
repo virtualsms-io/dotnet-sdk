@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace VirtualSMS;
 
 /// <summary>
-/// Client for the VirtualSMS API — SMS verification using real carrier SIMs.
+/// Client for the VirtualSMS API: SMS verification using real physical SIM cards, not VoIP.
 /// Get your API key at https://virtualsms.io (Settings → API Keys).
 /// API docs: https://virtualsms.io/api
 /// </summary>
