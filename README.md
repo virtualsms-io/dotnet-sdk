@@ -4,17 +4,17 @@ VirtualSMS is an account verification platform that combines real carrier mobile
 
 Built for developers and AI agents: REST API, hosted MCP server, SDKs.
 
-> **Unverified reconstruction.** This repo's source was re-created from the published NuGet package's own shipped `README.md` (see [`PROVENANCE.md`](./PROVENANCE.md)) — it has not been built or tested against the live API. Don't treat anything here as production-verified until it's been independently built and smoke-tested.
+> **Unverified reconstruction.** This repo's source was re-created from the published NuGet package's own shipped `README.md` (see [`PROVENANCE.md`](./PROVENANCE.md)). It has not been built or tested against the live API. Don't treat anything here as production-verified until it's been independently built and smoke-tested.
 
 ## What this SDK does
 
-This package is a thin .NET client for VirtualSMS's **SMS verification** endpoint (`handler_api.php`) — real carrier numbers, not VoIP, for receiving SMS codes on WhatsApp, Telegram, Google, and other services. It covers: checking balance, requesting a number, polling/waiting for the code, and marking an activation done or cancelled.
+This package is a thin .NET client for VirtualSMS's **SMS verification** endpoint (`handler_api.php`): real carrier numbers, not VoIP, for receiving SMS codes on WhatsApp, Telegram, Google, and other services. It covers: checking balance, requesting a number, polling/waiting for the code, and marking an activation done or cancelled.
 
-It does **not** cover proxies, number/platform rentals, or the private cloud browser — those aren't implemented in this client. For the full platform (numbers, proxies, cloud browser) use:
+It does **not** cover proxies, number/platform rentals, or the private cloud browser. Those aren't implemented in this client. For the full platform (numbers, proxies, cloud browser) use:
 - **REST API:** [virtualsms.io/docs](https://virtualsms.io/docs)
 - **Hosted MCP server** (for AI agents): [virtualsms.io/mcp](https://virtualsms.io/mcp)
 
-Proxy/rental support in this SDK is on the roadmap, not shipped — treat any future mention of it here as "coming soon" until a versioned release actually adds it.
+Proxy/rental support in this SDK is on the roadmap, not shipped. Treat any future mention of it here as "coming soon" until a versioned release actually adds it.
 
 ## Installation
 
@@ -63,11 +63,11 @@ Complete or cancel an activation.
 
 ## Ecosystem
 
-- [Official MCP registry](https://registry.modelcontextprotocol.io) — server id `io.github.virtualsms-io/sms`
+- [Official MCP registry](https://registry.modelcontextprotocol.io): server id `io.github.virtualsms-io/sms`
 - [VirtualSMS on Glama](https://glama.ai/mcp/servers)
 - [Smithery](https://smithery.ai/servers/virtualsms/virtualsms-mcp)
 - [mcp.so](https://mcp.so/servers/mcp-server-virtualsms-io)
-- [npm — virtualsms-mcp](https://www.npmjs.com/package/virtualsms-mcp)
+- [npm: virtualsms-mcp](https://www.npmjs.com/package/virtualsms-mcp)
 
 ## Other SDKs
 

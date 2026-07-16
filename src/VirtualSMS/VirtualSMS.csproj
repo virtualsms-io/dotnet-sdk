@@ -7,7 +7,7 @@
     <PackageId>VirtualSMS</PackageId>
     <Version>1.0.0</Version>
     <Authors>VirtualSMS</Authors>
-    <Description>.NET SDK for VirtualSMS SMS verification — real carrier numbers, not VoIP. WhatsApp, Telegram, Google and 700+ services.</Description>
+    <Description>VirtualSMS is an account verification platform that combines real carrier mobile numbers, matching-country proxies and a private cloud browser into one connected workflow. This package is the .NET SDK for SMS verification: real carrier numbers, not VoIP, across WhatsApp, Telegram, Google and 2500+ services in 145+ countries.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://virtualsms.io</PackageProjectUrl>
     <RepositoryUrl>https://github.com/virtualsms-io/dotnet-sdk</RepositoryUrl>
