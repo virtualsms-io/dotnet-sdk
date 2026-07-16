@@ -76,6 +76,11 @@ Complete or cancel an activation.
 - **PHP:** [packagist.org/packages/virtualsms/sdk](https://packagist.org/packages/virtualsms/sdk)
 - **Ruby:** [rubygems.org/gems/virtualsms-sdk](https://rubygems.org/gems/virtualsms-sdk)
 
+## Development
+
+Run `sh scripts/check-positioning.sh` before committing copy changes. It fails on
+stale service or country counts and other banned positioning wording.
+
 ## License
 
 MIT
