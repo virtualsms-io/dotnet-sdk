@@ -10,7 +10,7 @@ Built for developers and AI agents: REST API, hosted MCP server, SDKs.
 
 This package is a thin .NET client for VirtualSMS's **SMS verification** endpoint (`handler_api.php`): real physical SIM cards, not VoIP, for receiving SMS codes on WhatsApp, Telegram, Google, and other services. It covers: checking balance, requesting a number, polling/waiting for the code, and marking an activation done or cancelled.
 
-It does **not** cover proxies, number/platform rentals, or the private cloud browser. Those aren't implemented in this client. For the full platform (numbers, proxies, cloud browser) use:
+It does **not** cover proxies or number/platform rentals. Both are live on the wider platform but aren't implemented in this client. The private cloud browser is planned, coming soon, not yet available on any surface, this client or otherwise. For live proxies and rentals use:
 - **REST API:** [virtualsms.io/docs](https://virtualsms.io/docs)
 - **Hosted MCP server** (for AI agents): [virtualsms.io/mcp](https://virtualsms.io/mcp)
 
