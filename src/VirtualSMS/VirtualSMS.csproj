@@ -12,7 +12,7 @@
     <PackageTags>virtualsms;sms;sms-verification;otp;proxy;rental;api-client;sdk</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://virtualsms.io</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/virtualsms-io/dotnet-sdk</RepositoryUrl>
+    <RepositoryUrl>https://github.com/virtualsms-io/virtualsms-dotnet-sdk</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
