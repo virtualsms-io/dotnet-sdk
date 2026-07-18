@@ -25,10 +25,12 @@ dotnet add package VirtualSMS
 
 ## Quickstart
 
+<!-- TODO: re-point to /dashboard once the frontend migration ships -->
+
 ```csharp
 using VirtualSMS;
 
-// 1. Get your API key at https://virtualsms.io/dashboard (Settings -> API Keys)
+// 1. Get your API key at https://virtualsms.io (Settings -> API Keys)
 using var client = new VirtualSMSClient("vsms_your_api_key");
 
 // 2. Buy a number
