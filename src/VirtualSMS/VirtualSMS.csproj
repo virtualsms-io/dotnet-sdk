@@ -4,14 +4,19 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
     <PackageId>VirtualSMS</PackageId>
-    <Version>1.0.0</Version>
+    <Version>2.0.0</Version>
     <Authors>VirtualSMS</Authors>
-    <Description>VirtualSMS is an account verification platform that combines real carrier mobile numbers, matching-country proxies and a private cloud browser into one connected workflow. This package is the .NET SDK for SMS verification: real physical SIM cards, not VoIP, across WhatsApp, Telegram, Google and 2500+ services in 145+ countries.</Description>
+    <Description>Native .NET client for the VirtualSMS REST API v1: SMS verification on real carrier SIM cards (not VoIP), number rentals, and residential/mobile/datacenter proxies, across 2500+ services in 145+ countries. Covers activations, rentals, proxies, account, webhooks, and browser-session bootstrap.</Description>
+    <PackageTags>virtualsms;sms;sms-verification;otp;proxy;rental;api-client;sdk</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://virtualsms.io</PackageProjectUrl>
     <RepositoryUrl>https://github.com/virtualsms-io/dotnet-sdk</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

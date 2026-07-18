@@ -68,3 +68,36 @@ found; the public surface matches the documented contract and the sibling SDKs e
 everything it claims to implement. Still needs an actual `dotnet build`/`dotnet test` pass
 (SDK install required) before this can be called production-verified — don't downgrade this
 line item to "done" until that happens.
+
+## v2.0.0 rewrite (2026-07-18, VSMS-505)
+
+The 1.0.0 client above (legacy handler_api.php dispatcher, 6 methods) was fully replaced with
+a native REST v1 client covering the full canonical spec
+(Vault/Operations/2026-07-18-sdk-v2-spec.md): 46 specced methods across activations/orders,
+rentals (Full Access + Platform tiers), proxies, account, webhooks (new), browser sessions
+(beta), and carrier lookup. Source of truth for method shapes: the MCP server's typed client
+(mcp-server-update/src/client.ts) and tool handlers (src/tools.ts), cross-checked against this
+repo's own canonical spec doc.
+
+**Build/test: STILL NOT RUN from this machine**, same tooling gap as the 2026-07-16 pass, no
+dotnet SDK installed locally (dotnet build/test/pack all fail with "No .NET SDKs were found").
+All new code was written to compile by inspection only: implicit-usings gaps were checked
+file-by-file (Microsoft.NET.Sdk's implicit set is System, System.Collections.Generic, System.IO,
+System.Linq, System.Threading.Tasks; System.Threading and System.Net.Http are NOT implicit for
+a plain class library and were added explicitly wherever CancellationToken/HttpMethod/
+HttpClient are referenced), JsonContent.Create(object?, options:) overload resolution against
+the generic Create&lt;T&gt; form was reasoned through manually, and HttpContent.ReadAsByteArrayAsync
+was used instead of Stream.Length for the empty-body check (chunked-transfer streams don't
+reliably support Length). The new CI workflow (.github/workflows/ci.yml) runs dotnet build +
+dotnet test on every push/PR, that is the first real compiler pass this code will get. Treat
+the whole v2.0.0 tree as "sound by inspection, not build-verified" until that workflow goes
+green once.
+
+Client-side helpers (GetSmsAsync, WaitForSmsAsync polling-only, OrderHistoryAsync,
+CancelAllOrdersAsync, SearchServicesAsync, FindCheapestAsync, GetStatsAsync,
+GenerateProxyEndpointAsync) were ported field-for-field from tools.ts's handler functions, not
+re-derived from scratch: scoring formulas, cooldown pre-checks, and the catalog-vs-price
+stock-source distinction all match the canonical client's documented behavior.
+
+Not pushed, no PR opened, no tag created: PAT unavailable in this session. Commit sits local
+only, on branch backlink-play-a-recreate-source, pending a session with push access.

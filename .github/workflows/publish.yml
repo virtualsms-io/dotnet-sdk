@@ -1,0 +1,42 @@
+name: Publish to NuGet
+
+# Fires on any v* tag push (e.g. v2.0.0). Builds, tests, packs, and pushes the
+# VirtualSMS package to nuget.org. Requires a NUGET_API_KEY repo secret
+# (nuget.org API key with push rights for the VirtualSMS package).
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Pack and push to NuGet
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore src/VirtualSMS/VirtualSMS.csproj tests/VirtualSMS.Tests/VirtualSMS.Tests.csproj
+
+      - name: Build
+        run: dotnet build src/VirtualSMS/VirtualSMS.csproj tests/VirtualSMS.Tests/VirtualSMS.Tests.csproj --no-restore -c Release
+
+      - name: Test
+        env:
+          VIRTUALSMS_TEST_API_KEY: ${{ secrets.VIRTUALSMS_TEST_API_KEY }}
+        run: dotnet test tests/VirtualSMS.Tests/VirtualSMS.Tests.csproj --no-build -c Release
+
+      - name: Pack
+        run: dotnet pack src/VirtualSMS/VirtualSMS.csproj -c Release -o out --no-build -p:ContinuousIntegrationBuild=true
+
+      - name: Push to NuGet
+        run: dotnet nuget push "out/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate

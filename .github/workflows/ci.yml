@@ -1,0 +1,37 @@
+name: Build and test
+
+# Runs on every push/PR. This is the build+test gate the positioning guard
+# does not provide -- see .github/workflows/check-positioning.yml for that.
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore src/VirtualSMS/VirtualSMS.csproj tests/VirtualSMS.Tests/VirtualSMS.Tests.csproj
+
+      - name: Build
+        run: dotnet build src/VirtualSMS/VirtualSMS.csproj tests/VirtualSMS.Tests/VirtualSMS.Tests.csproj --no-restore -c Release
+
+      - name: Test
+        # VIRTUALSMS_TEST_API_KEY is optional -- when unset, the
+        # auth-required smoke test soft-skips (see SmokeTests.cs). The
+        # public ListServicesAsync smoke test always runs against the live API.
+        env:
+          VIRTUALSMS_TEST_API_KEY: ${{ secrets.VIRTUALSMS_TEST_API_KEY }}
+        run: dotnet test tests/VirtualSMS.Tests/VirtualSMS.Tests.csproj --no-build -c Release
