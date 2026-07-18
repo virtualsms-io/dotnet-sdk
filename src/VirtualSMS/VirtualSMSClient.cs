@@ -276,6 +276,12 @@ public sealed partial class VirtualSMSClient : IDisposable
 
         if (status >= 500)
         {
+            var lowerMessage = message.ToLowerInvariant();
+            if (lowerMessage.Contains("out of stock") || lowerMessage.Contains("no numbers"))
+            {
+                throw new NoNumbersException(status, isMutating, $"No numbers currently available: {message}");
+            }
+
             var errMessage = isMutating
                 ? $"VirtualSMS server error ({status}) on a request that may have made a purchase or changed " +
                   "state. DO NOT blindly retry: first verify with a read call (list_orders/get_order/" +

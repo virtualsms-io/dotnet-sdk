@@ -155,6 +155,11 @@ public sealed partial class VirtualSMSClient
     /// v2.1 candidate) -- polls GetOrderAsync every pollIntervalSeconds.
     /// Never throws on timeout: returns a result with Success = false.
     /// Throws if the order reaches a terminal failure state first.
+    ///
+    /// Defaults (300s timeout / 5s poll interval) intentionally differ from
+    /// the MCP tool's own default (60s timeout, same 5s interval) -- a
+    /// human/script blocking on this SDK call is typically willing to wait
+    /// longer than an LLM agent loop, per the SDK spec.
     /// </summary>
     public async Task<WaitForSmsResult> WaitForSmsAsync(
         string orderId,
