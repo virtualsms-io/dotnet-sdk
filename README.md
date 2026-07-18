@@ -1,12 +1,15 @@
 # VirtualSMS .NET SDK
 
-Native .NET client for the **VirtualSMS REST API v1**: SMS verification on real carrier SIM
-cards (not VoIP), number rentals, and residential/mobile/datacenter proxies, across 2500+
-services in 145+ countries.
+## What is VirtualSMS?
 
-Built for developers and AI agents: REST API, hosted MCP server, SDKs in 9 languages.
+Official .NET SDK for the VirtualSMS API. VirtualSMS is an account verification platform for
+individuals, developers, and AI agents: one-time SMS verification, dedicated number rentals,
+matching-country proxies, and private cloud browser sessions (beta), all behind one API, one
+MCP server, and one prepaid balance. This package wraps the REST API in native C#, backed by
+real carrier-issued mobile numbers (real physical SIM cards, not VoIP) across 2500+ services
+in 145+ countries.
 
-## What this SDK does
+Built for developers and AI agents: REST API, hosted MCP server, SDKs.
 
 Covers the full customer-facing REST v1 surface: activations/orders (buy a number, poll or
 wait for the code, cancel/swap/retry), rentals (Full Access and Platform tiers), proxies
@@ -14,13 +17,13 @@ wait for the code, cancel/swap/retry), rentals (Full Access and Platform tiers),
 profile, transactions, usage stats), webhooks (create/list/update/delete/test/deliveries),
 carrier/line-type lookup, and manual-registration browser sessions (invite-only beta).
 
-## Installation
+## Install
 
 ```bash
 dotnet add package VirtualSMS
 ```
 
-## Quick Start
+## Quickstart
 
 ```csharp
 using VirtualSMS;
@@ -44,7 +47,27 @@ else
 }
 ```
 
-## Method groups
+## Capabilities
+
+1. **One-time SMS verification.** Receive a code for a service like WhatsApp, Telegram, Discord,
+   or a dating app, on demand, from $0.05 per code.
+2. **Dedicated number rentals.** Hold one number for 1-30 days and receive SMS from any service
+   on that number, from $0.25/day.
+3. **Matching-country proxies.** Pair a number with an IP from the same country, across 223
+   proxy countries, from $1.10/GB.
+4. **Private cloud browser sessions (beta).** Start a country-matched browser in a live viewer
+   for the signup step itself, invite-only.
+
+## Why real SIM cards
+
+VirtualSMS runs on real carrier-issued mobile numbers, backed by real physical SIM cards,
+not VoIP. Services like WhatsApp, Telegram, Discord, and dating apps run a carrier lookup
+before they send a code, and VoIP or virtual numbers fail that check more often than a real
+SIM does. A physical SIM on a real carrier network reads like any other phone on that network,
+carriers like Vodafone, O2, and T-Mobile depending on the country, which is part of why
+VirtualSMS holds a 95%+ success rate across 2500+ services in 145+ countries.
+
+## API coverage
 
 | Group | Examples |
 |---|---|
@@ -58,7 +81,7 @@ else
 
 Full docs: [virtualsms.io/docs](https://virtualsms.io/docs).
 
-## Constructor
+### Constructor
 
 ```csharp
 var client = new VirtualSMSClient(
@@ -70,7 +93,7 @@ var client = new VirtualSMSClient(
     });
 ```
 
-## Error handling
+### Error handling
 
 Every error the SDK raises derives from `VirtualSMSException`. Typed subclasses map to HTTP
 status codes: `BadApiKeyException` (401), `InsufficientBalanceException` (402),
@@ -100,16 +123,53 @@ catch (ServerErrorException ex) when (ex.IsMutating)
 GET requests get a bounded, automatic retry (up to 3 attempts, exponential backoff) on network
 errors and 5xx responses. Mutating calls (POST/PATCH/DELETE) are never auto-retried by the SDK.
 
-## Rental tiers
+### Rental tiers
 
 Two tiers, both refund-identical (full refund within 20 minutes of purchase, before the first
 SMS): `RentalTier.FullAccess` (local SIM inventory, any service) and `RentalTier.Platform`
 (sourced via our global supplier network, one service per number, 24/72/168h durations only).
 
-## Examples
+### Examples
 
 See `examples/` for runnable end-to-end flows: activation (`BasicActivation`), rental
 (`RentalFlow`), and proxy (`ProxyFlow`).
+
+## AI agents and MCP
+
+This SDK is the API-client half: a typed .NET wrapper around the REST API for services and
+backends that call C# directly. VirtualSMS also runs a separate hosted MCP server so an AI
+agent (Claude, Cursor, or any MCP-compatible client) can request a number, wait for a code, or
+manage a rental the same way a developer would call the API directly.
+
+## FAQ
+
+### What is VirtualSMS?
+
+VirtualSMS is an account verification platform for individuals, developers, and AI agents. It combines one-time SMS verification, dedicated number rentals, matching-country proxies, and private cloud browser sessions behind one API, one MCP server, and one prepaid balance.
+
+### Does VirtualSMS use real SIM cards or VoIP numbers?
+
+VirtualSMS uses real carrier-issued mobile numbers, backed by real physical SIM cards, not VoIP. Many services, including WhatsApp, Telegram, Discord, and dating apps, reject VoIP and virtual numbers at signup; a real physical SIM on a real carrier network passes that check far more often, which is reflected in a 95%+ success rate.
+
+### Which services and countries does VirtualSMS support?
+
+VirtualSMS covers 2500+ services across 145+ countries for SMS verification and number rentals, plus matching-country proxies across 223 proxy countries. Coverage spans messaging apps, social platforms, marketplaces, dating apps, and financial services.
+
+### Can I rent a number, or only buy one-time codes?
+
+Both. Buy a single one-time code from $0.05, or rent a dedicated number for 1-30 days from $0.25/day to receive SMS from any service on that number for the rental window.
+
+### Does VirtualSMS work with AI agents and MCP?
+
+Yes. VirtualSMS exposes a hosted MCP server plus a REST API and official SDKs in nine languages, so an AI agent can request a number, wait for a code, or manage a rental the same way a developer would call the API directly.
+
+### How much does VirtualSMS cost?
+
+Pricing is pay-as-you-go from one prepaid balance: SMS verification from $0.05 per code, number rentals from $0.25/day, and proxies from $1.10/GB. There is no subscription requirement.
+
+### Is there a free API key?
+
+Yes. Creating a VirtualSMS account issues an API key immediately, at no cost. You only spend from your prepaid balance when you place an order: an activation, a rental, or a proxy.
 
 ## Links
 
@@ -133,6 +193,7 @@ See `examples/` for runnable end-to-end flows: activation (`BasicActivation`), r
 - **Node.js:** [npmjs.com/package/virtualsms-sdk](https://www.npmjs.com/package/virtualsms-sdk)
 - **PHP:** [packagist.org/packages/virtualsms/sdk](https://packagist.org/packages/virtualsms/sdk)
 - **Ruby:** [rubygems.org/gems/virtualsms-sdk](https://rubygems.org/gems/virtualsms-sdk)
+- **Go, Rust, Swift, Java:** all under [github.com/virtualsms-io](https://github.com/virtualsms-io)
 
 ## Development
 
