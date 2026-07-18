@@ -28,7 +28,9 @@ jobs:
           dotnet restore tests/VirtualSMS.Tests/VirtualSMS.Tests.csproj
 
       - name: Build
-        run: dotnet build src/VirtualSMS/VirtualSMS.csproj tests/VirtualSMS.Tests/VirtualSMS.Tests.csproj --no-restore -c Release
+        # Building the test project transitively builds VirtualSMS.csproj
+        # (it's a ProjectReference) -- one project path avoids MSB1008.
+        run: dotnet build tests/VirtualSMS.Tests/VirtualSMS.Tests.csproj --no-restore -c Release
 
       - name: Test
         # VIRTUALSMS_TEST_API_KEY is optional -- when unset, the
